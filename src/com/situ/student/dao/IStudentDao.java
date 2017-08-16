@@ -2,7 +2,7 @@ package com.situ.student.dao;
 
 import java.util.List;
 
-import com.situ.student.Student;
+import com.situ.student.pojo.Student;
 
 public interface IStudentDao {
 

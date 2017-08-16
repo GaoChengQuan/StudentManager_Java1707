@@ -1,4 +1,4 @@
-package com.situ.student;
+package com.situ.student.pojo;
 
 import java.io.Serializable;
 
@@ -17,6 +17,14 @@ public class Student implements Serializable {
 	public Student(Integer id, String name, Integer age, String gender, String address) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+	}
+	
+	public Student(String name, Integer age, String gender, String address) {
+		super();
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
