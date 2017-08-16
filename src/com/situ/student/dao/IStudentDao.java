@@ -2,6 +2,8 @@ package com.situ.student.dao;
 
 import java.util.List;
 
+import org.junit.validator.PublicClassValidator;
+
 import com.situ.student.pojo.Student;
 
 public interface IStudentDao {
@@ -47,4 +49,10 @@ public interface IStudentDao {
 	 */
 	public List<Student> findByGender(String gender);
 	
+	/**
+	 * 判断指定的用户名在数据库中是否存在
+	 * @param name
+	 * @return
+	 */
+	public boolean checkName(String name);
 }
