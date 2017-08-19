@@ -4,10 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.situ.student.dao.IStudentDao;
+import com.situ.student.exception.NameRepeatException;
 import com.situ.student.pojo.Student;
 import com.situ.student.util.JdbcUtil;
 
@@ -20,12 +24,13 @@ public class StudentDaoMySqlImpl implements IStudentDao{
 		int result = 0;
 		try {
 			connection = JdbcUtil.getConnection();
-			String sql = "INSERT INTO student(NAME,age,gender,address) VALUES(?,?,?,?);";
+			String sql = "INSERT INTO student(NAME,age,gender,address,birthday) VALUES(?,?,?,?,?);";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, student.getName());
 			preparedStatement.setInt(2, student.getAge());
 			preparedStatement.setString(3, student.getGender());
 			preparedStatement.setString(4, student.getAddress());
+			preparedStatement.setDate(5, new java.sql.Date(student.getBirthday().getTime()));
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -35,7 +40,7 @@ public class StudentDaoMySqlImpl implements IStudentDao{
 		
 		return result;
 	}
-
+	
 	@Override
 	public int deleteById(int id) {
 		// TODO Auto-generated method stub
@@ -65,7 +70,7 @@ public class StudentDaoMySqlImpl implements IStudentDao{
 				int age = resultSet.getInt("age");
 				String gender = resultSet.getString("gender");
 				String address = resultSet.getString("address");
-				Student student = new Student(id, name, age, gender, address);
+				Student student = new Student(id, name, age, gender, address, new Date());
 				list.add(student);
 			}
 		} catch (SQLException e) {

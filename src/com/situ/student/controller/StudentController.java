@@ -1,5 +1,6 @@
 package com.situ.student.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import com.situ.student.exception.NameRepeatException;
@@ -20,7 +21,7 @@ public class StudentController {
 	}
 
 	public boolean add(String name, int age, String gender, String address) throws NameRepeatException {
-		Student student = new Student(name, age, gender, address);
+		Student student = new Student(name, age, gender, address, new Date());
 		return studentService.add(student);
 	}
 	
